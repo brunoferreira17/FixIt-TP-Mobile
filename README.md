@@ -1,16 +1,16 @@
 # FixIt - Gestão de Avarias de Equipamentos
 
-![Logotipo](link-para-o-logotipo.png)
+![Logotipo](logo.png) *(Logotipo a adicionar)*
 
 ## Descrição
 **FixIt** é uma aplicação móvel desenvolvida no âmbito da unidade curricular *Computação Móvel* do curso de Engenharia Informática (2024-2025) no Instituto Politécnico de Viana do Castelo. O objetivo é criar uma solução eficiente para a gestão de avarias e manutenções de equipamentos numa fábrica de peças automóveis. A aplicação permite registar, acompanhar e resolver avarias em tempo real, promovendo a comunicação entre operadores, técnicos de manutenção e gestores de produção.
 
-Desenvolvida em **Kotlin** com **Android Studio**, a aplicação suporta múltiplos perfis de utilizador, modo offline com sincronização via API, e relatórios detalhados para otimizar a operação industrial.
+Desenvolvida em **Kotlin** com **Android Studio**, a FixIt suporta múltiplos perfis de utilizador, modo offline com sincronização via API, e relatórios detalhados para otimizar a operação industrial.
 
 ---
 
 ## Contexto
-A aplicação foi projetada para uma fábrica de peças automóveis, onde os equipamentos principais incluem:
+A FixIt foi projetada para uma fábrica de peças automóveis, onde os equipamentos principais incluem:
 - **Máquinas Industriais** (ex.: CNC, prensas).
 - **Computadores** (ex.: controlo de produção).
 - **Correias Transportadoras**.
@@ -36,7 +36,7 @@ Os utilizadores são:
 
 ## Estrutura do Projeto
 - `/docs`: Documentação, incluindo requisitos e mockups.
-- `/src`: Código-fonte (a adicionar na 2ª entrega).
+- `/src`: Código-fonte (a adicionar).
 - `/design`: Recursos gráficos e mockups (a adicionar).
 - `/db`: Esquema da base de dados (a adicionar).
 
