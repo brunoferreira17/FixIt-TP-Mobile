@@ -1,0 +1,48 @@
+# Android Studio / IntelliJ IDEA
+*.iml
+.idea/*
+!.idea/vcs.xml
+!.idea/.gitignore
+!.idea/codeStyles/
+!.idea/runConfigurations/
+
+# Gradle
+.gradle/
+build/
+app/build/
+
+# Local configuration files
+local.properties
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux
+*~
+
+# Native builds
+.externalNativeBuild
+.cxx
+
+# Log files
+*.log
+*.logcat
+log/
+
+# Captures from Android Studio
+/captures
+
+# Jetpack Compose
+.compose/
+
+# Test reports
+/test-results/
+/build/reports/
+
+# Backup files
+*.bak
+*.swp

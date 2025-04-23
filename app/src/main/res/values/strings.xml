@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FixIt</string>
+    <string name="welcome">Bem-vindo ao FixIT!</string>
+    <string name="email_hint">Insira seu email</string>
+    <string name="password_hint">Insira sua senha</string>
+    <string name="login">Entrar</string>
+</resources>
