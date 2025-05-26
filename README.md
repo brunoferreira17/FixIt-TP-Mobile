@@ -34,7 +34,7 @@ The application targets an automotive parts factory, managing faults in equipmen
 - **Database**: Schema in `/db/database_schema.md` and diagram in `/db/database_diagram.png`.
 
 ## Setup Instructions
-1. Clone the repository: `git clone https://github.com/[your-username]/FixIt-TP-Mobile.git`.
+1. Clone the repository: `git clone https://github.com/brunoferreira17/FixIt-TP-Mobile.git`.
 2. Open the project in Android Studio.
 3. Check `/docs` for requirements, `/design` for mockups, and `/db` for the database schema.
 4. Further setup details will be provided in the second submission.
