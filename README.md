@@ -29,7 +29,7 @@ The application targets an automotive parts factory, managing faults in equipmen
 
 ## Deliverables (First Submission)
 - **Requirements**: Software requirements (functional and non-functional) in `/docs/requirements.pdf`.
-- **Project Management**: Trello board at [Trello Link](#) (replace with actual URL).
+- **Project Management**: Trello board at Trello.
 - **Design**: Mockups (PT/EN, portrait/landscape) in `/design/mockups/` and logo in `/design/fixit_logo.png`.
 - **Database**: Schema in `/db/database_schema.md` and diagram in `/db/database_diagram.png`.
 
