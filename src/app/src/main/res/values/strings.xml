@@ -1,7 +1,17 @@
 <resources>
+    <!-- Login Page -->
     <string name="app_name">FixIt</string>
-    <string name="welcome">Bem-vindo ao FixIT!</string>
-    <string name="email_hint">Insira seu email</string>
-    <string name="password_hint">Insira sua senha</string>
-    <string name="login">Entrar</string>
+    <string name="welcome_login">Welcome to FixIT!</string>
+    <string name="email_hint">Enter your email</string>
+    <string name="password_hint">Enter your password</string>
+    <string name="login">Login</string>
+    <string name="createaccount_hint"> Create a new Account</string>
+    <string name="change_languague">EN</string>
+
+    <!-- Register Page -->
+    <string name="message_register">Sign Up</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="phoneNumber_hint">Enter your phone(optional)</string>
+    <string name="register">Register</string>
+    <string name="login_hint"> Already have an account? Login</string>
 </resources>

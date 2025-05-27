@@ -3,6 +3,7 @@ package com.ipvc.fixit.dao
 import androidx.room.*
 import com.ipvc.fixit.entities.Equipment
 
+@Dao
 interface EquipmentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
