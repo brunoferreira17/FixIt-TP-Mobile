@@ -9,7 +9,7 @@ import com.ipvc.fixit.entities.*
 
 @Database(
     entities = [User::class, Equipment::class, Fault::class, Message::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

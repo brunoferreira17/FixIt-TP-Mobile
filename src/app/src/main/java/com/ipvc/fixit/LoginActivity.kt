@@ -1,24 +1,26 @@
 package com.ipvc.fixit
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.widget.*
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import com.ipvc.fixit.database.AppDatabase
 import com.ipvc.fixit.repository.UserRepository
 import com.ipvc.fixit.viewmodel.UserViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.Locale
 
-class LoginActivity : ComponentActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var emailField: EditText
     private lateinit var passwordField: EditText
     private lateinit var loginButton: Button
     private lateinit var showPasswordButton: ImageView
     private lateinit var languageSwitcher: TextView
+    private lateinit var goToRegisterText: TextView
 
     private var passwordVisible = false
     private lateinit var viewModel: UserViewModel
@@ -26,13 +28,10 @@ class LoginActivity : ComponentActivity() {
     private fun setLocale(languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
-
         val config = resources.configuration
         config.setLocale(locale)
         config.setLayoutDirection(locale)
-
         resources.updateConfiguration(config, resources.displayMetrics)
-
         recreate()
     }
 
@@ -45,6 +44,7 @@ class LoginActivity : ComponentActivity() {
         loginButton = findViewById(R.id.loginButton)
         showPasswordButton = findViewById(R.id.showPasswordButton)
         languageSwitcher = findViewById(R.id.textView3)
+        goToRegisterText = findViewById(R.id.goToRegisterText)
 
         val userDao = AppDatabase.getDatabase(this).userDao()
         val repository = UserRepository(userDao)
@@ -52,34 +52,50 @@ class LoginActivity : ComponentActivity() {
 
         showPasswordButton.setOnClickListener {
             passwordVisible = !passwordVisible
-            if (passwordVisible) {
-                passwordField.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                showPasswordButton.setImageResource(R.drawable.ic_eye_off)
+            passwordField.inputType = if (passwordVisible) {
+                InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             } else {
-                passwordField.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                showPasswordButton.setImageResource(R.drawable.ic_eye)
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
             passwordField.setSelection(passwordField.text.length)
+            showPasswordButton.setImageResource(
+                if (passwordVisible) R.drawable.ic_eye_off else R.drawable.ic_eye
+            )
         }
 
         loginButton.setOnClickListener {
-            val email = emailField.text.toString()
+            val email = emailField.text.toString().trim()
             val password = passwordField.text.toString()
 
             if (email.isBlank() || password.isBlank()) {
-                Toast.makeText(this, "Preenche todos os campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.login(email, password)
             }
         }
 
+        goToRegisterText.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
+        }
+
         lifecycleScope.launch {
             viewModel.loggedUser.collectLatest { user ->
-                if (user != null) {
-                    Toast.makeText(this@LoginActivity, "Login como ${user.role}", Toast.LENGTH_SHORT).show()
-                    // TODO: redirecionar
-                } else {
-                    Toast.makeText(this@LoginActivity, "Credenciais inválidas", Toast.LENGTH_SHORT).show()
+                user?.let {
+                    redirectToDashboard(it.role)
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.loginError.collectLatest { errorKey ->
+                errorKey?.let {
+                    val message = when (it) {
+                        "error_email_not_confirmed" -> getString(R.string.error_email_not_confirmed)
+                        "error_invalid_credentials" -> getString(R.string.error_invalid_credentials)
+                        else -> getString(R.string.error_generic)
+                    }
+                    Toast.makeText(this@LoginActivity, message, Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -89,5 +105,16 @@ class LoginActivity : ComponentActivity() {
             val newLang = if (current == "pt") "en" else "pt"
             setLocale(newLang)
         }
+    }
+
+    private fun redirectToDashboard(role: String) {
+        val intent = when (role.lowercase()) {
+            "operator" -> Intent(this, OperatorDashboardActivity::class.java)
+            //"technician" -> Intent(this, TechnicalDashboardActivity::class.java)
+            //"manager" -> Intent(this, ManagerDashboardActivity::class.java)
+            else -> Intent(this, MainActivity::class.java)
+        }
+        startActivity(intent)
+        finish()
     }
 }

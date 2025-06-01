@@ -87,7 +87,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_warning_red_background"
+                    android:src="@drawable/ic_warning_red"
                 android:contentDescription="Urgent warning" />
 
                 <TextView

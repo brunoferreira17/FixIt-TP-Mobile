@@ -8,6 +8,18 @@
     <string name="createaccount_hint"> Criar uma conta nova</string>
     <string name="change_languague">PT</string>
 
+    <string name="fill_all_fields">Preenche todos os campos</string>
+    <string name="invalid_credentials">Credenciais inválidas</string>
+
+    <string name="auto_login_title">Login automático</string>
+    <string name="auto_login_message">Iniciar sessão automaticamente como %1$s?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+
+    <string name="error_email_not_confirmed">O teu email ainda não está confirmado. Verifica a tua caixa de entrada.</string>
+    <string name="error_invalid_credentials">Credenciais inválidas. Verifica o email e a palavra-passe.</string>
+    <string name="error_generic">Erro ao iniciar sessão. Tenta novamente mais tarde.</string>
+
     <!-- Register Page -->
     <string name="message_register">Registro</string>
     <string name="name_hint">Insira seu Nome</string>

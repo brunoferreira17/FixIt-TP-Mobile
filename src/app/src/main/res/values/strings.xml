@@ -8,6 +8,19 @@
     <string name="createaccount_hint"> Create a new Account</string>
     <string name="change_languague">EN</string>
 
+    <string name="fill_all_fields">Fill in all fields</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+
+    <string name="auto_login_title">Auto Login</string>
+    <string name="auto_login_message">Automatically log in as %1$s?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="error_email_not_confirmed">Your email is not confirmed. Please check your inbox.</string>
+    <string name="error_invalid_credentials">Invalid credentials. Please check your email and password.</string>
+    <string name="error_generic">Login failed. Please try again later.</string>
+
+
     <!-- Register Page -->
     <string name="message_register">Sign Up</string>
     <string name="name_hint">Enter your name</string>

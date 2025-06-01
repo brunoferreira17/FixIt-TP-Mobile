@@ -30,4 +30,13 @@ class UserRepository(private val userDao: UserDao) {
     suspend fun login(email: String, password: String): User? = withContext(Dispatchers.IO) {
         userDao.login(email, password)
     }
+
+    suspend fun getCurrentUser(): User? = withContext(Dispatchers.IO) {
+        userDao.getCurrentUser()
+    }
+
+    suspend fun getUserById(userId: String): User? {
+        return userDao.getUserById(userId)
+    }
+
 }

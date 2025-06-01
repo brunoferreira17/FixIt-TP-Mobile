@@ -58,7 +58,7 @@
         app:layout_constraintStart_toEndOf="@+id/logoIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/reportIssueButton"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
         android:fontFamily="@font/roboto"
         android:text="Report Issue"
         android:textColor="#FFFFFF"
-        app:cornerRadius="16dp"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

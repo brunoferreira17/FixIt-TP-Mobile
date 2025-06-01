@@ -2,7 +2,9 @@ package com.ipvc.fixit.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Entity(tableName = "faults")
 data class Fault(
     @PrimaryKey(autoGenerate = true) val faultId: Int = 0,
