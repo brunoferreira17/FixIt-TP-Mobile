@@ -29,4 +29,15 @@ interface UserDao {
 
     @Query("SELECT * FROM users WHERE userId = :userId LIMIT 1")
     suspend fun getUserById(userId: String): User?
+
+    @Query("DELETE FROM users")
+    suspend fun clearAll()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(users: List<User>)
+
+    suspend fun clearAndInsert(users: List<User>) {
+        clearAll()
+        insertAll(users)
+    }
 }

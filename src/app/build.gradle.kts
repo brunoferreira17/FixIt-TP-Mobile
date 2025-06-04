@@ -80,6 +80,7 @@ dependencies {
     implementation(libs.postgrest.kt)
     implementation(libs.realtime.kt)
     implementation(libs.ktor.client.cio)
+    implementation(libs.storage.kt)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

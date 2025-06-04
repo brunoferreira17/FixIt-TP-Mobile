@@ -1,8 +1,8 @@
 [versions]
 agp = "8.8.0"
-bom = "3.0.0" # Versão do Supabase BOM conforme documentação
+bom = "3.0.0"
 kotlin = "2.0.0"
-ktor = "3.0.0" # Versão compatível com Supabase
+ktor = "3.0.0"
 cardview = "1.0.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -10,7 +10,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.9.0"
 activityCompose = "1.10.1"
-composeBom = "2025.05.00" # Versão plausível para maio de 2025
+composeBom = "2025.05.00"
 constraintlayout = "2.2.1"
 appcompat = "1.7.0"
 roomKtx = "2.7.1"
@@ -26,6 +26,7 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 auth-kt = { module = "io.github.jan-tennert.supabase:auth-kt" }
 postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt" }
 realtime-kt = { module = "io.github.jan-tennert.supabase:realtime-kt" }
+storage-kt = { module = "io.github.jan-tennert.supabase:storage-kt" }
 supabase-bom = { module = "io.github.jan-tennert.supabase:bom", version.ref = "bom" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

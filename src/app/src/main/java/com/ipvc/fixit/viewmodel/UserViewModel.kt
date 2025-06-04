@@ -1,5 +1,6 @@
 package com.ipvc.fixit.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -51,7 +52,11 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
         }
     }
 
-    fun login(email: String, password: String) {
+    suspend fun getUserById(userId: String): User? {
+        return repository.getUserById(userId)
+    }
+
+    fun login(email: String, password: String, context: Context) {
         viewModelScope.launch {
             try {
                 val client = SupabaseClientInstance.client
@@ -69,9 +74,16 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
                         filter { eq("id", userId) }
                     }.decodeSingle<User>()
 
-                val existing = repository.getUserById(userId)
+                // Guardar ID do utilizador autenticado em SharedPreferences
+                val prefs = context.getSharedPreferences("FixItPrefs", Context.MODE_PRIVATE)
+                prefs.edit().putString("LOGGED_USER_ID", userData.userId).apply()
+
+                // Guardar ou atualizar utilizador na Room
+                val existing = repository.getUserById(userData.userId)
                 if (existing == null) {
                     repository.insert(userData)
+                } else {
+                    repository.update(userData)
                 }
 
                 _loggedUser.value = userData
@@ -89,7 +101,6 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
                 _loginError.value = errorKey
                 _loggedUser.value = null
             }
-
         }
     }
 }

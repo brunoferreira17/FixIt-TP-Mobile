@@ -9,6 +9,7 @@ import com.ipvc.fixit.database.AppDatabase
 import com.ipvc.fixit.repository.UserRepository
 import com.ipvc.fixit.utils.UserRegistrationManager
 import android.util.Log
+import java.util.Locale
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -18,8 +19,19 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var phoneInput: EditText
     private lateinit var registerButton: Button
     private lateinit var goToLoginText: TextView
+    private lateinit var languageSwitcher: TextView
 
     private lateinit var userRepository: UserRepository
+
+    private fun setLocale(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        config.setLayoutDirection(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+        recreate()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +43,7 @@ class RegisterActivity : AppCompatActivity() {
         phoneInput = findViewById(R.id.phoneField)
         registerButton = findViewById(R.id.registerButton)
         goToLoginText = findViewById(R.id.goToLoginText)
+        languageSwitcher = findViewById(R.id.languageSelector)
 
         val db = AppDatabase.getDatabase(applicationContext)
         userRepository = UserRepository(db.userDao())
@@ -42,7 +55,7 @@ class RegisterActivity : AppCompatActivity() {
             val phone = phoneInput.text.toString()
 
             if (name.isEmpty() || userEmail.isEmpty() || userPassword.isEmpty()) {
-                Toast.makeText(this, "Preenche todos os campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -52,6 +65,12 @@ class RegisterActivity : AppCompatActivity() {
         goToLoginText.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        }
+
+        languageSwitcher.setOnClickListener {
+            val current = resources.configuration.locales.get(0).language
+            val newLang = if (current == "pt") "en" else "pt"
+            setLocale(newLang)
         }
     }
 

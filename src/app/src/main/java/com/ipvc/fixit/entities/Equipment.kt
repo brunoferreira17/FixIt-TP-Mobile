@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 data class Equipment(
     @PrimaryKey(autoGenerate = true) val equipmentId: Int = 0,
     val name: String,
-    val type: String,
-    val location: String
+    val model: String,
+    val location: String,
+    val installedAt: Long
 )

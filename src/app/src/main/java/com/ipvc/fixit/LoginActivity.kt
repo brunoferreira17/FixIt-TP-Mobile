@@ -3,14 +3,22 @@ package com.ipvc.fixit
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ipvc.fixit.database.AppDatabase
+import com.ipvc.fixit.entities.Equipment
+import com.ipvc.fixit.entities.Fault
+import com.ipvc.fixit.entities.Message
+import com.ipvc.fixit.entities.User
 import com.ipvc.fixit.repository.UserRepository
 import com.ipvc.fixit.viewmodel.UserViewModel
+import io.github.jan.supabase.postgrest.postgrest
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
@@ -43,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         passwordField = findViewById(R.id.passwordField)
         loginButton = findViewById(R.id.loginButton)
         showPasswordButton = findViewById(R.id.showPasswordButton)
-        languageSwitcher = findViewById(R.id.textView3)
+        languageSwitcher = findViewById(R.id.languageSelector)
         goToRegisterText = findViewById(R.id.goToRegisterText)
 
         val userDao = AppDatabase.getDatabase(this).userDao()
@@ -70,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
             if (email.isBlank() || password.isBlank()) {
                 Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.login(email, password)
+                viewModel.login(email, password, this)
             }
         }
 

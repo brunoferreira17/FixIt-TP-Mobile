@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 data class Message(
     @PrimaryKey(autoGenerate = true) val messageId: Int = 0,
     val faultId: Int,
-    val senderId: Int,
+    val senderId: String,
     val message: String,
     val sentAt: Long
 )
