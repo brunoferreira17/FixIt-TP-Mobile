@@ -38,4 +38,8 @@ class FaultRepository(private val dao: FaultDao) {
     suspend fun getUnsynced(): List<Fault> = withContext(Dispatchers.IO) {
         dao.getUnsyncedFaults()
     }
+
+    suspend fun getByReporterUUID(userId: String): List<Fault> = dao.getByReporterUUID(userId)
+
+    suspend fun markAsSynced(faultId: Int) = dao.markAsSynced(faultId)
 }

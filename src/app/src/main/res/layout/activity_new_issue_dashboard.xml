@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6F0FA"
@@ -21,22 +22,22 @@
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/rem"
         android:text="@string/app_name"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/logoIcon"
+        app:layout_constraintBottom_toTopOf="@+id/userRole"
+        app:layout_constraintStart_toEndOf="@+id/logoIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/languageSwitcher"
+        android:id="@+id/languageSelector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="EN"
+        android:text="@string/change_languague"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,17 +47,14 @@
         android:id="@+id/userRole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="241dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="148dp"
         android:fontFamily="@font/roboto"
-        android:text="Operator João"
+        android:text="@string/user_role_prefix"
         android:textColor="#555555"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/newIssueContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/logoIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/logoIcon"
+        app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
     <LinearLayout
         android:id="@+id/newIssueContainer"
@@ -74,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="New Issue"
+            android:text="@string/new_issue_title"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -82,15 +80,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Equipment:"
+            android:text="@string/equipment_label"
             android:textSize="16sp"
             android:textColor="#000000" />
 
-        <EditText
+        <Spinner
+            android:id="@+id/equipmentSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Select an equipment"
-            android:textSize="16sp"
             android:padding="12dp"
             android:background="@android:drawable/edit_text"
             android:layout_marginBottom="16dp" />
@@ -98,14 +95,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description:"
+            android:text="@string/description_label"
             android:textSize="16sp"
             android:textColor="#000000" />
 
         <EditText
+            android:id="@+id/descriptionField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Describe the issue..."
+            android:hint="@string/description_hint"
             android:textSize="16sp"
             android:padding="12dp"
             android:background="@android:drawable/edit_text"
@@ -116,31 +114,31 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Photo (optional)"
+            android:text="@string/photo_label"
             android:textSize="16sp"
             android:textColor="#000000" />
 
         <Button
+            android:id="@+id/photoButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Take Photo"
+            android:text="@string/take_photo_button"
             android:textSize="16sp"
             android:padding="12dp"
             android:background="@android:drawable/btn_default"
-            android:layout_marginBottom="16dp"
-            android:enabled="false" />
+            android:layout_marginBottom="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Urgency:"
+            android:text="@string/urgency_label"
             android:textSize="16sp"
             android:textColor="#000000" />
 
         <Spinner
+            android:id="@+id/urgencySpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Select urgency"
             android:padding="12dp"
             android:background="@android:drawable/edit_text"
             android:layout_marginBottom="16dp" />
@@ -149,31 +147,33 @@
 
     <Button
         android:id="@+id/submitButton"
-        android:layout_width="125dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="232dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="88dp"
         android:backgroundTint="#2196F3"
         android:padding="12dp"
-        android:text="Submit"
+        android:text="@string/submit_button"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/newIssueContainer" />
+        app:layout_constraintEnd_toStartOf="@+id/backButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/backButton"
-        android:layout_width="125dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="88dp"
         android:backgroundTint="#B0BEC5"
         android:padding="12dp"
-        android:text="Back"
+        android:text="@string/back_button"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/newIssueContainer" />
+        app:layout_constraintStart_toEndOf="@+id/submitButton"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <include
         android:id="@+id/bottomNavBar"

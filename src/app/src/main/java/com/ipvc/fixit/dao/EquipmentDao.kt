@@ -18,6 +18,17 @@ interface EquipmentDao {
     @Query("SELECT * FROM equipment ORDER BY equipmentId ASC")
     suspend fun getAllEquipments(): List<Equipment>
 
-    @Query("SELECT * FROM equipment WHERE type = :type")
-    suspend fun getEquipmentsByType(type: String): List<Equipment>
+    @Query("SELECT * FROM equipment WHERE model = :model")
+    suspend fun getEquipmentsByType(model: String): List<Equipment>
+
+    @Query("DELETE FROM equipment")
+    suspend fun clearAll()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(equipmentList: List<Equipment>)
+
+    suspend fun clearAndInsert(equipmentList: List<Equipment>) {
+        clearAll()
+        insertAll(equipmentList)
+    }
 }

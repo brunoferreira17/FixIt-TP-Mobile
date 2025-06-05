@@ -26,4 +26,8 @@ class EquipmentRepository(private val dao: EquipmentDao) {
     suspend fun getByType(type: String): List<Equipment> = withContext(Dispatchers.IO) {
         dao.getEquipmentsByType(type)
     }
+
+    suspend fun deleteAll() {
+        dao.clearAll()
+    }
 }

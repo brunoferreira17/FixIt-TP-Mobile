@@ -39,4 +39,8 @@ class EquipmentViewModel(private val repository: EquipmentRepository) : ViewMode
             _equipments.value = repository.getAll()
         }
     }
+
+    suspend fun getAllEquipments(): List<Equipment> {
+        return repository.getAll()
+    }
 }

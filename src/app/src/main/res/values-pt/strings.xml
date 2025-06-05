@@ -5,13 +5,60 @@
     <string name="email_hint">Insira seu email</string>
     <string name="password_hint">Insira sua senha</string>
     <string name="login">Entrar</string>
-    <string name="createaccount_hint"> Criar uma conta nova</string>
+    <string name="createaccount_hint">Criar uma conta nova</string>
     <string name="change_languague">PT</string>
+
+    <string name="fill_all_fields">Preenche todos os campos</string>
+    <string name="invalid_credentials">Credenciais inválidas</string>
+
+    <string name="auto_login_title">Login automático</string>
+    <string name="auto_login_message">Iniciar sessão automaticamente como %1$s?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+
+    <string name="error_email_not_confirmed">O teu email ainda não está confirmado. Verifica a tua caixa de entrada.</string>
+    <string name="error_invalid_credentials">Credenciais inválidas. Verifica o email e a palavra-passe.</string>
+    <string name="error_generic">Erro ao iniciar sessão. Tenta novamente mais tarde.</string>
 
     <!-- Register Page -->
     <string name="message_register">Registro</string>
-    <string name="name_hint">Insira seu Nome</string>
-    <string name="phoneNumber_hint">Insira o seu numero(opcional)</string>
+    <string name="name_hint">Insira seu nome</string>
+    <string name="phoneNumber_hint">Insira o seu número (opcional)</string>
     <string name="register">Registrar</string>
-    <string name="login_hint"> Já tens conta? Login</string>
+    <string name="login_hint">Já tens conta? Login</string>
+
+    <!-- Technical Page -->
+    <string name="report_issue">Reportar Problema</string>
+    <string name="your_recent_issues">Os teus problemas reportados recentes</string>
+    <string name="language_code">EN</string>
+    <string name="user_role_prefix">Operador </string>
+    <string name="view_details">Ver detalhes</string>
+
+    <string name="status_pending">Pendente</string>
+    <string name="status_in_progress">Em progresso</string>
+    <string name="status_resolved">Resolvida</string>
+
+
+    <!-- New Issue Page -->
+    <string name="new_issue_title">Novo Problema</string>
+    <string name="equipment_label">Equipamento:</string>
+    <string name="select_equipment">Seleciona um equipamento</string>
+    <string name="description_label">Descrição:</string>
+    <string name="description_hint">Descreve o problema...</string>
+    <string name="photo_label">Foto (opcional)</string>
+    <string name="take_photo_button">Carregar Foto</string>
+    <string name="urgency_label">Urgência:</string>
+    <string name="submit_button">Submeter</string>
+    <string name="back_button">Voltar</string>
+    <string name="language_switcher">PT</string>
+
+    <string name="urgency_low">Baixa</string>
+    <string name="urgency_medium">Média</string>
+    <string name="urgency_high">Alta</string>
+
+    <string name="choose_from_gallery">Escolher da galeria</string>
+    <string name="photo_uploaded">Foto carregada com sucesso</string>
+
+    <string name="issue_reported_successfully">Avaria registada com sucesso!</string>
+
 </resources>

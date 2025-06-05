@@ -57,4 +57,19 @@ class FaultViewModel(private val repository: FaultRepository) : ViewModel() {
             _faults.value = repository.getByReporter(userId)
         }
     }
+
+    fun getFaultsByUserId(userId: String): StateFlow<List<Fault>> {
+        viewModelScope.launch {
+            _faults.value = repository.getByReporterUUID(userId)
+        }
+        return faults
+    }
+
+    fun markAsSynced(faultId: Int) {
+        viewModelScope.launch {
+            repository.markAsSynced(faultId)
+            loadAll()
+        }
+    }
+
 }
