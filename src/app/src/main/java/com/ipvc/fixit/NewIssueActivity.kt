@@ -159,10 +159,14 @@ class NewIssueActivity : ComponentActivity() {
                     return@launch
                 }
 
+                val technician = userViewModel.getAnyTechnician()
+                val assignedTechId = technician?.userId
+
+
                 val fault = com.ipvc.fixit.entities.Fault(
                     equipmentId = selectedEquipment!!.equipmentId,
                     reportedBy = (user.userId.toIntOrNull() ?: -1).toString(),
-                    assignedTo = null,
+                    assignedTo = assignedTechId,
                     description = description,
                     photo = selectedPhotoUrl,
                     urgency = selectedUrgency!!,

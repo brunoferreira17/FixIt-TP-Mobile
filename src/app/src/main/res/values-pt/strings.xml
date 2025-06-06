@@ -32,7 +32,6 @@
     <string name="your_recent_issues">Os teus problemas reportados recentes</string>
     <string name="language_code">EN</string>
     <string name="user_role_prefix">Operador </string>
-    <string name="view_details">Ver detalhes</string>
 
     <string name="status_pending">Pendente</string>
     <string name="status_in_progress">Em progresso</string>
@@ -60,5 +59,24 @@
     <string name="photo_uploaded">Foto carregada com sucesso</string>
 
     <string name="issue_reported_successfully">Avaria registada com sucesso!</string>
+
+    <!-- Technical Page -->
+    <string name="user_role_prefix_technical">Tecnico</string>
+
+    <string name="view_details">Ver Detalhes</string>
+    <string name="send_message">Enviar Mensagem</string>
+    <string name="change_status">Alterar Estado</string>
+    <string name="edit_description">Editar Descrição</string>
+    <string name="user_not_authenticated">Utilizador não autenticado</string>
+
+
+    <string name="equipment">Equipamento</string>
+    <string name="location">Localização</string>
+    <string name="date">Data</string>
+    <string name="status">Estado</string>
+    <string name="description">Descrição</string>
+
+    <string name="status_updated">Estado atualizado com sucesso</string>
+    <string name="description_updated">Descrição atualizada com sucesso</string>
 
 </resources>

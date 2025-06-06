@@ -6,6 +6,7 @@ object SessionManager {
 
     private const val PREF_NAME = "FixItPrefs"
     private const val KEY_LOGGED_USER_ID = "LOGGED_USER_ID"
+    private const val KEY_LOGGED_USER_ROLE = "LOGGED_USER_ROLE"
 
     fun saveUserId(context: Context, userId: String) {
         val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -15,6 +16,16 @@ object SessionManager {
     fun getLoggedUserId(context: Context): String? {
         val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         return prefs.getString(KEY_LOGGED_USER_ID, null)
+    }
+
+    fun saveUserRole(context: Context, role: String) {
+        val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        prefs.edit().putString(KEY_LOGGED_USER_ROLE, role).apply()
+    }
+
+    fun getLoggedUserRole(context: Context): String? {
+        val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return prefs.getString(KEY_LOGGED_USER_ROLE, null)
     }
 
     fun clearSession(context: Context) {

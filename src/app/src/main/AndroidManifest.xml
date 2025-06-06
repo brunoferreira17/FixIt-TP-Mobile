@@ -71,6 +71,11 @@
             android:name=".NewIssueActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".TechnicalIssueActivity"
+            android:exported="false" />
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

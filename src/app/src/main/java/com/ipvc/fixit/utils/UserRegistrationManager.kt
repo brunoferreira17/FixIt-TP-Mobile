@@ -9,6 +9,7 @@ import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
@@ -45,30 +46,50 @@ object UserRegistrationManager {
 
         scope.launch {
             try {
-                Log.d(TAG, "A tentar criar utilizador no Supabase Auth...")
-                val user = client.auth.signUpWith(Email) {
-                    email = cleanEmail
-                    password = cleanPassword
-                    data = buildJsonObject {
-                        put("name", cleanName)
-                        put("phone", cleanPhone)
-                        put("role", role)
+                val userInfo = try {
+                    client.auth.signUpWith(Email) {
+                        email = cleanEmail
+                        password = cleanPassword
+                        data = buildJsonObject {
+                            put("name", cleanName)
+                            put("phone", cleanPhone)
+                            put("role", role)
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Erro interno no signUpWith: ${e.message}", e)
+                    null
+                }
+
+                Log.d(TAG, "Resultado do signUp: $userInfo")
+
+                if (userInfo == null) {
+                    Log.w(TAG, "signUp devolveu null — a tentar login para recuperar ID...")
+                    try {
+                        client.auth.signInWith(Email) {
+                            email = cleanEmail
+                            password = cleanPassword
+                        }
+                    } catch (loginError: Exception) {
+                        Log.e(TAG, "Falha ao fazer login depois do signUp falhado: ${loginError.message}", loginError)
+                        throw Exception("Utilizador criado mas falha ao autenticar.")
                     }
                 }
 
-                val userId = user?.id ?: throw Exception("Utilizador não criado no Auth.")
+                val userId = client.auth.currentUserOrNull()?.id ?: throw Exception("Impossível obter userId após login.")
+
                 Log.d(TAG, "Utilizador criado com sucesso no Auth! userId: $userId")
 
                 Log.d(TAG, "A inserir utilizador na tabela Users do Supabase...")
                 client.postgrest.from("Users").insert(
-                    mapOf(
-                        "id" to userId,
-                        "name" to cleanName,
-                        "email" to cleanEmail,
-                        "password" to cleanPassword,
-                        "phone" to cleanPhone,
-                        "role" to role
-                    )
+                    buildJsonObject {
+                        put("id", JsonPrimitive(userId))
+                        put("name", JsonPrimitive(cleanName))
+                        put("email", JsonPrimitive(cleanEmail))
+                        put("password", JsonPrimitive(cleanPassword))
+                        put("phone", if (cleanPhone.isNotEmpty()) JsonPrimitive(cleanPhone) else JsonPrimitive(null as String?))
+                        put("role", JsonPrimitive(role))
+                    }
                 )
 
                 Log.d(TAG, "Inserção na tabela Users concluída!")

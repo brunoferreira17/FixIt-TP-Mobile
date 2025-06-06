@@ -3,22 +3,15 @@ package com.ipvc.fixit
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ipvc.fixit.database.AppDatabase
-import com.ipvc.fixit.entities.Equipment
-import com.ipvc.fixit.entities.Fault
-import com.ipvc.fixit.entities.Message
-import com.ipvc.fixit.entities.User
 import com.ipvc.fixit.repository.UserRepository
+import com.ipvc.fixit.utils.SessionManager
 import com.ipvc.fixit.viewmodel.UserViewModel
-import io.github.jan.supabase.postgrest.postgrest
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
@@ -90,6 +83,9 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.loggedUser.collectLatest { user ->
                 user?.let {
+                    SessionManager.saveUserId(this@LoginActivity, it.userId)
+                    SessionManager.saveUserRole(this@LoginActivity, it.role)
+
                     redirectToDashboard(it.role)
                 }
             }
@@ -109,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         languageSwitcher.setOnClickListener {
-            val current = resources.configuration.locales.get(0).language
+            val current = resources.configuration.locales[0].language
             val newLang = if (current == "pt") "en" else "pt"
             setLocale(newLang)
         }
@@ -118,7 +114,7 @@ class LoginActivity : AppCompatActivity() {
     private fun redirectToDashboard(role: String) {
         val intent = when (role.lowercase()) {
             "operator" -> Intent(this, OperatorDashboardActivity::class.java)
-            //"technician" -> Intent(this, TechnicalDashboardActivity::class.java)
+            "technical" -> Intent(this, TechnicalDashboardActivity::class.java)
             //"manager" -> Intent(this, ManagerDashboardActivity::class.java)
             else -> Intent(this, MainActivity::class.java)
         }

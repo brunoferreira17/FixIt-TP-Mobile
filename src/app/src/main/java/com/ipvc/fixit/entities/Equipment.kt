@@ -11,5 +11,5 @@ data class Equipment(
     val name: String,
     val model: String,
     val location: String,
-    val installedAt: Long
+    val installedAt: Long? = null
 )

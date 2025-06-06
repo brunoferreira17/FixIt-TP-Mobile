@@ -72,4 +72,11 @@ class FaultViewModel(private val repository: FaultRepository) : ViewModel() {
         }
     }
 
+    suspend fun loadAllAssignedTo(userId: String) {
+        _faults.value = repository.getByAssignedUUID(userId)
+    }
+
+    suspend fun getUnsynced(): List<Fault> {
+        return repository.getUnsynced()
+    }
 }
