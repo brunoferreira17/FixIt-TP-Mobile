@@ -64,6 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/userRole">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardHighUrgency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -89,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="Urgent Issues"
+                    android:text="@string/urgency_high"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -102,6 +103,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardMediumUrgency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -127,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="Medium Issues"
+                    android:text="@string/urgency_medium"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -140,6 +142,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardLowUrgency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -165,7 +168,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="Minor Issues "
+                    android:text="@string/urgency_low"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 

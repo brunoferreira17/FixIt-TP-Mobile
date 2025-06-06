@@ -56,6 +56,11 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
         return repository.getUserById(userId)
     }
 
+    suspend fun getAnyTechnician(): User? {
+        return repository.getAnyTechnician()
+    }
+
+
     fun login(email: String, password: String, context: Context) {
         viewModelScope.launch {
             try {
@@ -72,13 +77,11 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
                 val userData = client.postgrest.from("Users")
                     .select {
                         filter { eq("id", userId) }
-                    }.decodeSingle<User>()
+                    }.decodeList<User>().firstOrNull() ?: throw Exception("Utilizador não encontrado na base de dados.")
 
-                // Guardar ID do utilizador autenticado em SharedPreferences
                 val prefs = context.getSharedPreferences("FixItPrefs", Context.MODE_PRIVATE)
                 prefs.edit().putString("LOGGED_USER_ID", userData.userId).apply()
 
-                // Guardar ou atualizar utilizador na Room
                 val existing = repository.getUserById(userData.userId)
                 if (existing == null) {
                     repository.insert(userData)

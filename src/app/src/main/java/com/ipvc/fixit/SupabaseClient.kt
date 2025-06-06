@@ -49,7 +49,14 @@ object SupabaseClientInstance {
                 put("syncstatus", JsonPrimitive(true))
             }
 
-            client.postgrest.from("Fault").insert(json)
+            client.postgrest
+                .from("Fault")
+                .update(json) {
+                    filter {
+                        eq("faultid", fault.faultId)
+                    }
+                }
+
             Log.d("SupabaseSync", "Avaria sincronizada com sucesso.")
             true
         } catch (e: Exception) {

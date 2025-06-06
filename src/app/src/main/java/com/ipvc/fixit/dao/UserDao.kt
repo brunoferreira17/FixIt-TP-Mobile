@@ -33,6 +33,9 @@ interface UserDao {
     @Query("DELETE FROM users")
     suspend fun clearAll()
 
+    @Query("SELECT * FROM users WHERE role = 'technical' LIMIT 1")
+    suspend fun getAnyTechnician(): User?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(users: List<User>)
 

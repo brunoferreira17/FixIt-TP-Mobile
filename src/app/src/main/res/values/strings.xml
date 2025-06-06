@@ -27,17 +27,15 @@
     <string name="register">Register</string>
     <string name="login_hint">Already have an account? Login</string>
 
-    <!-- Technical Page -->
+    <!-- Operator Page -->
     <string name="report_issue">Report Issue</string>
     <string name="your_recent_issues">Your Recent reported Issues</string>
     <string name="language_code">PT</string>
     <string name="user_role_prefix">Operator </string>
-    <string name="view_details">View details</string>
 
     <string name="status_pending">Pending</string>
     <string name="status_in_progress">In progress</string>
     <string name="status_resolved">Resolved</string>
-
 
     <!-- New Issue Page -->
     <string name="new_issue_title">New Issue</string>
@@ -60,4 +58,23 @@
     <string name="photo_uploaded">Photo uploaded successfully</string>
 
     <string name="issue_reported_successfully">Issue reported successfully!</string>
+
+    <!-- Technical Page -->
+    <string name="user_role_prefix_technical">Technical</string>
+
+    <string name="view_details">View Details</string>
+    <string name="send_message">Send Message</string>
+    <string name="change_status">Change Status</string>
+    <string name="edit_description">Edit Description</string>
+    <string name="user_not_authenticated">User not authenticated</string>
+
+
+    <string name="equipment">Equipment</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="status">Status</string>
+    <string name="description">Description</string>
+
+    <string name="status_updated">Status updated successfully</string>
+    <string name="description_updated">Description updated successfully</string>
 </resources>

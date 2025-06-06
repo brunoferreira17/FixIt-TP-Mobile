@@ -33,6 +33,9 @@ interface FaultDao {
     @Query("SELECT * FROM faults WHERE CAST(reportedBy AS TEXT) = :userId")
     suspend fun getByReporterUUID(userId: String): List<Fault>
 
+    @Query("SELECT * FROM faults WHERE CAST(assignedTo AS TEXT) = :userId ORDER BY reportedAt DESC")
+    suspend fun getByAssignedUUID(userId: String): List<Fault>
+
     @Query("UPDATE faults SET syncStatus = 1 WHERE faultId = :faultId")
     suspend fun markAsSynced(faultId: Int)
 
