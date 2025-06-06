@@ -1,25 +1,29 @@
 package com.ipvc.fixit
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.*
-import androidx.activity.ComponentActivity
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ipvc.fixit.database.AppDatabase
 import com.ipvc.fixit.entities.Fault
 import com.ipvc.fixit.repository.FaultRepository
 import com.ipvc.fixit.repository.UserRepository
 import com.ipvc.fixit.utils.SessionManager
+import com.ipvc.fixit.utils.setupBottomNavBar
 import com.ipvc.fixit.viewmodel.FaultViewModel
 import com.ipvc.fixit.viewmodel.UserViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
-class OperatorDashboardActivity : ComponentActivity() {
+class OperatorDashboardActivity : AppCompatActivity()  {
 
     private lateinit var userViewModel: UserViewModel
     private lateinit var faultViewModel: FaultViewModel
@@ -54,6 +58,8 @@ class OperatorDashboardActivity : ComponentActivity() {
             val newLang = if (current == "pt") "en" else "pt"
             setLocale(newLang)
         }
+
+        setupBottomNavBar()
 
         reportIssueButton.setOnClickListener {
             startActivity(Intent(this, NewIssueActivity::class.java))

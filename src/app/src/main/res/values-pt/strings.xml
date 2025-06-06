@@ -79,4 +79,21 @@
     <string name="status_updated">Estado atualizado com sucesso</string>
     <string name="description_updated">Descrição atualizada com sucesso</string>
 
+    <string name="profile_title">Perfil</string>
+    <string name="profile_photo">Foto de Perfil</string>
+    <string name="remove_photo">Remover Foto</string>
+    <string name="edit_profile">Editar Perfil</string>
+    <string name="save">Guardar</string>
+    <string name="logout">Terminar Sessão</string>
+    <string name="profile_updated">Perfil atualizado com sucesso</string>
+    <string name="error_updating_profile">Erro ao atualizar o perfil</string>
+    <string name="select_image">Selecionar uma imagem</string>
+    <string name="no_image_selected">Nenhuma imagem selecionada</string>
+    <string name="image_upload_success">Imagem enviada com sucesso</string>
+    <string name="image_upload_fail">Falha ao enviar imagem</string>
+    <string name="remove_photo_confirm">Queres remover a tua foto de perfil?</string>
+    <string name="change_language">Mudar Idioma</string>
+    <string name="role_operator">Cargo: </string>
+
+
 </resources>

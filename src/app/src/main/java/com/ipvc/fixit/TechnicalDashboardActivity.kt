@@ -61,6 +61,7 @@ class TechnicalDashboardActivity : AppCompatActivity() {
         }
 
         setupBottomNavBar()
+
         val urgentCard = findViewById<CardView>(R.id.cardHighUrgency)
         val mediumCard = findViewById<CardView>(R.id.cardMediumUrgency)
         val minorCard = findViewById<CardView>(R.id.cardLowUrgency)

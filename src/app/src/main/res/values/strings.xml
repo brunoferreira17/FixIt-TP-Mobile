@@ -77,4 +77,22 @@
 
     <string name="status_updated">Status updated successfully</string>
     <string name="description_updated">Description updated successfully</string>
+
+    <string name="profile_title">Profile</string>
+    <string name="profile_photo">Profile Photo</string>
+    <string name="remove_photo">Remove Photo</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="save">Save</string>
+    <string name="logout">Logout</string>
+    <string name="profile_updated">Profile updated successfully</string>
+    <string name="error_updating_profile">Error updating profile</string>
+    <string name="select_image">Select an image</string>
+    <string name="no_image_selected">No image selected</string>
+    <string name="image_upload_success">Image uploaded successfully</string>
+    <string name="image_upload_fail">Image upload failed</string>
+    <string name="remove_photo_confirm">Do you want to remove your profile photo?</string>
+    <string name="change_language">Change Language</string>
+    <string name="role_operator">Role: </string>
+
+
 </resources>

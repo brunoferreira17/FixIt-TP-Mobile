@@ -1,6 +1,8 @@
 [versions]
 agp = "8.8.0"
 bom = "3.0.0"
+compiler = "4.15.1"
+glide = "4.15.1"
 kotlin = "2.0.0"
 ktor = "3.0.0"
 cardview = "1.0.0"
@@ -24,6 +26,8 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 auth-kt = { module = "io.github.jan-tennert.supabase:auth-kt" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt" }
 realtime-kt = { module = "io.github.jan-tennert.supabase:realtime-kt" }
 storage-kt = { module = "io.github.jan-tennert.supabase:storage-kt" }
