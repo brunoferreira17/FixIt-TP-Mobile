@@ -82,6 +82,10 @@ dependencies {
     implementation(libs.ktor.client.cio)
     implementation(libs.storage.kt)
 
+    implementation(libs.glide)
+    kapt (libs.compiler)
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

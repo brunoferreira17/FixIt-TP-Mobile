@@ -5,6 +5,7 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ipvc.fixit.OperatorDashboardActivity
+import com.ipvc.fixit.ProfileActivity
 import com.ipvc.fixit.R
 import com.ipvc.fixit.TechnicalDashboardActivity
 
@@ -48,6 +49,6 @@ fun AppCompatActivity.setupBottomNavBar() {
     }
 
     profileBtn.setOnClickListener {
-        //startActivity(Intent(this, ProfileActivity::class.java))
+        startActivity(Intent(this, ProfileActivity::class.java))
     }
 }

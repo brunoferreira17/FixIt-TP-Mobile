@@ -43,5 +43,8 @@ class UserRepository(private val userDao: UserDao) {
         return userDao.getAnyTechnician()
     }
 
+    suspend fun updateUser(user: User) {
+        userDao.update(user)
+    }
 
 }

@@ -106,4 +106,15 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
             }
         }
     }
+
+    suspend fun updateUser(user: User): Boolean {
+        return try {
+            repository.updateUser(user)
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+
 }

@@ -6,6 +6,7 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import com.ipvc.fixit.entities.Equipment
 import com.ipvc.fixit.entities.Fault
+import com.ipvc.fixit.entities.User
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
@@ -89,5 +90,28 @@ object SupabaseClientInstance {
         val network = cm.activeNetwork ?: return false
         val capabilities = cm.getNetworkCapabilities(network) ?: return false
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
+    suspend fun updateUserInSupabase(user: User): Boolean {
+        return try {
+            val json = buildJsonObject {
+                put("name", JsonPrimitive(user.name))
+                put("email", JsonPrimitive(user.email))
+                put("password", JsonPrimitive(user.password))
+                put("phone", JsonPrimitive(user.phone ?: ""))
+                put("profilephoto", JsonPrimitive(user.profilePhoto ?: ""))
+            }
+
+            client.postgrest
+                .from("Users")
+                .update(json) {
+                    filter { eq("id", user.userId) }
+                }
+
+            true
+        } catch (e: Exception) {
+            Log.e("Supabase", "Erro ao atualizar utilizador no Supabase: ${e.message}", e)
+            false
+        }
     }
 }
