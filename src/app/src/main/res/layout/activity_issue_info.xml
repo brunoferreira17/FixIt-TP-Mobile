@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +8,7 @@
     android:background="#E6F0FA"
     tools:context=".IssueInfoActivity">
 
+    <!-- Logo -->
     <ImageView
         android:id="@+id/logoIcon"
         android:layout_width="56dp"
@@ -17,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- App Title -->
     <TextView
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
@@ -30,6 +33,7 @@
         app:layout_constraintStart_toEndOf="@id/logoIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Language Switch -->
     <TextView
         android:id="@+id/languageSelector"
         android:layout_width="wrap_content"
@@ -42,35 +46,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Role / Nome -->
     <TextView
         android:id="@+id/userRole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="66dp"
-        android:layout_marginEnd="241dp"
-        android:layout_marginBottom="115dp"
         android:fontFamily="@font/roboto"
-        android:text="Operator João"
+        android:text=""
         android:textColor="#555555"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/detailsContainer"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/logoIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Título -->
     <TextView
         android:id="@+id/chatTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Issue #123 - Details"
+        android:text="@string/issue_details_title"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
         app:layout_constraintTop_toBottomOf="@id/userRole"
-        android:layout_marginTop="40dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Detalhes -->
     <LinearLayout
         android:id="@+id/detailsContainer"
         android:layout_width="0dp"
@@ -83,44 +87,50 @@
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/chatTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/backButton">
 
         <TextView
+            android:id="@+id/equipmentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Equipment: CNC #1"
+            android:text="Equipment: -"
             android:textSize="16sp"
             android:textColor="#000000"
             android:layout_marginBottom="8dp" />
 
         <TextView
+            android:id="@+id/locationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location: Line 1"
+            android:text="Location: -"
             android:textSize="16sp"
             android:textColor="#000000"
             android:layout_marginBottom="8dp" />
 
         <TextView
+            android:id="@+id/descriptionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description: Motor failure detected during operation."
+            android:text="Description: -"
             android:textSize="16sp"
             android:textColor="#000000"
             android:layout_marginBottom="8dp" />
 
         <TextView
+            android:id="@+id/statusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status: Pending"
+            android:text="Status: -"
             android:textSize="16sp"
             android:textColor="#000000"
             android:layout_marginBottom="8dp" />
 
         <TextView
+            android:id="@+id/reportedAtText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reported: 26/04/2025 10:30"
+            android:text="Reported: -"
             android:textSize="16sp"
             android:textColor="#000000"
             android:layout_marginBottom="16dp" />
@@ -129,7 +139,7 @@
             android:id="@+id/resolvedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Resolved: 27/04/2025 14:45"
+            android:text="Resolved: -"
             android:textSize="16sp"
             android:textColor="#000000"
             android:layout_marginBottom="8dp"
@@ -137,14 +147,14 @@
 
         <ImageView
             android:id="@+id/issueImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="......."
-            android:scaleType="centerCrop"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
             android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop"
             android:visibility="gone" />
     </LinearLayout>
 
+    <!-- Botão Voltar -->
     <Button
         android:id="@+id/backButton"
         android:layout_width="150dp"
@@ -152,14 +162,14 @@
         android:layout_marginBottom="70dp"
         android:background="@drawable/rounded_button"
         android:padding="8dp"
-        android:text="Voltar"
+        android:text="@string/button_back"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavBar" />
 
+    <!-- Bottom Nav -->
     <include
         android:id="@+id/bottomNavBar"
         layout="@layout/component_bottom_nav"

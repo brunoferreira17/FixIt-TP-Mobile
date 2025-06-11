@@ -61,7 +61,7 @@
     <string name="issue_reported_successfully">Avaria registada com sucesso!</string>
 
     <!-- Technical Page -->
-    <string name="user_role_prefix_technical">Tecnico</string>
+    <string name="user_role_prefix_technical">Tecnico </string>
 
     <string name="view_details">Ver Detalhes</string>
     <string name="send_message">Enviar Mensagem</string>
@@ -95,5 +95,71 @@
     <string name="change_language">Mudar Idioma</string>
     <string name="role_operator">Cargo: </string>
 
+    <!-- Página de Mensagens -->
+    <string name="messages_title">Mensagens</string>
+    <string name="no_conversations">Sem conversas disponíveis</string>
+    <string name="last_message_label">Última mensagem:</string>
+    <string name="issue_prefix">Avaria nº</string>
+    <string name="equipment_prefix">Equipamento:</string>
+
+    <!-- Página de Chat -->
+    <string name="chat_title_prefix">Chat - Avaria nº</string>
+    <string name="type_message_hint">Escreve uma mensagem...</string>
+    <string name="send">Enviar</string>
+
+    <string name="type_your_message">Escreve a tua mensagem</string>
+    <string name="message_sent">Mensagem enviada com sucesso</string>
+    <string name="message_send_failed">Falha ao enviar mensagem</string>
+    <string name="no_internet">Sem ligação à internet. Tenta novamente mais tarde</string>
+
+    <string name="issue_details_title">Detalhes da Avaria</string>
+    <string name="button_back">Voltar</string>
+    <string name="resolved">Resolvido</string>
+
+    <string name="user_role_prefix_manager">Gestor </string>
+    <string name="overview_title">Visão Geral</string>
+    <string name="total_issues">Total de Avarias: %1$d</string>
+    <string name="pending_issues">Pendentes: %1$d</string>
+    <string name="in_progress_issues">Em Progresso: %1$d</string>
+    <string name="solved_issues">Resolvidas: %1$d</string>
+    <string name="most_problematic">Mais Problemático: %1$s</string>
+    <string name="view_issues">Ver Avarias</string>
+    <string name="assign_technicians">Atribuir Técnicos</string>
+    <string name="manage_equipments">Gerir Equipamentos</string>
+    <string name="communicate_team">Comunicar com Equipa</string>
+
+    <string name="none">Nenhum</string>
+    <string name="unknown">Desconhecido</string>
+
+    <string name="send_message_to_chat">Enviar mensagem para o chat</string>
+
+    <string name="assign_to_other_technician">Atribuir a outro técnico</string>
+    <string name="technician_assigned">Técnico atribuído com sucesso</string>
+    <string name="no_technicians_available">Não há técnicos disponíveis</string>
+
+    <string name="technicians">Técnicos</string>
+    <string name="operators">Operadores</string>
+    <string name="promote">Promover</string>
+    <string name="demote">Despromover</string>
+
+    <string name="promoted_success">Utilizador promovido com sucesso</string>
+    <string name="demoted_success">Utilizador despromovido com sucesso</string>
+
+    <string name="add_equipment">Adicionar Equipamento</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar</string>
+
+    <string name="equipment_label2">Equipment: %1$s</string>
+    <string name="model_label">Modelo: %1$s</string>
+    <string name="location_label">Localização: %1$s</string>
+    <string name="installed_label">Instalado em: %1$s</string>
+    <string name="equipment_deleted">Equipamento eliminado</string>
+
+    <string name="add_edit_equipment_title">Adicionar ou Editar Equipamento</string>
+    <string name="equipment_name">Nome do Equipamento</string>
+    <string name="equipment_model">Modelo</string>
+    <string name="equipment_location">Localização</string>
+    <string name="equipment_saved">Equipamento guardado com sucesso.</string>
+    <string name="add_edit_equipment">Adicionar Equipamento</string>
 
 </resources>

@@ -6,8 +6,8 @@ import com.ipvc.fixit.entities.Equipment
 @Dao
 interface EquipmentDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertEquipment(equipment: Equipment)
+    @Insert
+    suspend fun insertEquipment(equipment: Equipment): Long
 
     @Update
     suspend fun updateEquipment(equipment: Equipment)
@@ -26,6 +26,12 @@ interface EquipmentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(equipmentList: List<Equipment>)
+
+    @Query("SELECT * FROM equipment WHERE equipmentId = :id")
+    fun getEquipmentById(id: Int): Equipment?
+
+    @Query("DELETE FROM equipment WHERE equipmentId = :id")
+    suspend fun deleteEquipmentById(id: Int)
 
     suspend fun clearAndInsert(equipmentList: List<Equipment>) {
         clearAll()

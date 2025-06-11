@@ -8,6 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Entity(tableName = "faults")
 data class Fault(
+    @SerialName("faultid")
     @PrimaryKey(autoGenerate = true) val faultId: Int = 0,
 
     @SerialName("equipmentid")

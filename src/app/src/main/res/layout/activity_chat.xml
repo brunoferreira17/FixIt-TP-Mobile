@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="EN"
+        android:text="@string/language_switcher"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,170 +47,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
-        android:layout_marginEnd="241dp"
-        android:layout_marginBottom="140dp"
         android:fontFamily="@font/roboto"
-        android:text="Operator João"
+        android:text=""
         android:textColor="#555555"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/chatTitle"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/logoIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/chatTitle" />
 
     <TextView
         android:id="@+id/chatTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chat - Issue #123"
+        android:text="@string/chat_title_prefix"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userRole"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="40dp" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMessages"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@id/chatTitle"
         app:layout_constraintBottom_toTopOf="@id/messageInputContainer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:id="@+id/messagesContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Technician Maria"
-                    android:textSize="12sp"
-                    android:textColor="#555555"
-                    android:layout_gravity="start" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:padding="8dp"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="2dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="The motor issue has been identified."
-                        android:textSize="14sp"
-                        android:textColor="#000000" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="26/04/2025 10:30"
-                    android:textSize="12sp"
-                    android:textColor="#555555"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Operator João"
-                    android:textSize="12sp"
-                    android:textColor="#555555"
-                    android:layout_gravity="end" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#E0F0FF"
-                    android:padding="8dp"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="2dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Great, thanks for the update!"
-                        android:textSize="14sp"
-                        android:textColor="#000000" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="26/04/2025 10:32"
-                    android:textSize="12sp"
-                    android:textColor="#555555"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Technician Maria"
-                    android:textSize="12sp"
-                    android:textColor="#555555"
-                    android:layout_gravity="start" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:padding="8dp"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="2dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="I'll order the replacement parts today."
-                        android:textSize="14sp"
-                        android:textColor="#000000" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="26/04/2025 10:35"
-                    android:textSize="12sp"
-                    android:textColor="#555555"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_chat_message" />
 
     <LinearLayout
         android:id="@+id/messageInputContainer"
@@ -231,7 +99,7 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
-            android:hint="Type a message..."
+            android:hint="@string/type_message_hint"
             android:padding="8dp"
             android:textSize="14sp"
             tools:ignore="TouchTargetSizeCheck" />
@@ -242,7 +110,7 @@
             android:layout_height="40dp"
             android:background="@drawable/rounded_button"
             android:padding="8dp"
-            android:text="Send"
+            android:text="@string/send"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             tools:ignore="TouchTargetSizeCheck" />

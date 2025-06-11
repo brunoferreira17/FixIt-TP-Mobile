@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
-import com.ipvc.fixit.entities.Equipment
 import com.ipvc.fixit.entities.Fault
 import com.ipvc.fixit.entities.User
 import io.github.jan.supabase.SupabaseClient
@@ -58,32 +57,14 @@ object SupabaseClientInstance {
                     }
                 }
 
-            Log.d("SupabaseSync", "Avaria sincronizada com sucesso.")
+
+            Log.d("SupabaseSync", "Avaria atualizada com sucesso.")
             true
         } catch (e: Exception) {
-            Log.e("SupabaseSync", "Erro ao sincronizar avaria: ${e.message}", e)
+            Log.e("SupabaseSync", "Erro ao atualizar avaria: ${e.message}", e)
             false
         }
     }
-
-    suspend fun syncEquipment(equipment: Equipment): Boolean {
-        return try {
-            val json = buildJsonObject {
-                put("name", JsonPrimitive(equipment.name))
-                put("model", JsonPrimitive(equipment.model))
-                put("location", JsonPrimitive(equipment.location))
-                put("installedat", JsonPrimitive(equipment.installedAt))
-            }
-
-            client.postgrest.from("Equipment").insert(json)
-            Log.d("SupabaseSync", "Equipamento sincronizado com sucesso.")
-            true
-        } catch (e: Exception) {
-            Log.e("SupabaseSync", "Erro ao sincronizar equipamento: ${e.message}", e)
-            false
-        }
-    }
-
 
     fun isConnectedToInternet(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

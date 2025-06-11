@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ipvc.fixit.database.AppDatabase
 import com.ipvc.fixit.entities.Fault
+import com.ipvc.fixit.entities.User
 import com.ipvc.fixit.repository.FaultRepository
 import com.ipvc.fixit.repository.UserRepository
 import com.ipvc.fixit.utils.SessionManager
-import com.ipvc.fixit.utils.syncAllPendingFaults
 import com.ipvc.fixit.utils.setupBottomNavBar
 import com.ipvc.fixit.viewmodel.FaultViewModel
 import com.ipvc.fixit.viewmodel.UserViewModel
@@ -25,7 +25,7 @@ import kotlinx.serialization.json.put
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TechnicalIssueActivity : AppCompatActivity() {
+class ManagerIssueDetailsActivity : AppCompatActivity() {
 
     private lateinit var faultViewModel: FaultViewModel
     private lateinit var userViewModel: UserViewModel
@@ -33,7 +33,6 @@ class TechnicalIssueActivity : AppCompatActivity() {
     private lateinit var languageSwitcher: TextView
     private lateinit var userRoleText: TextView
     private var expandedCard: View? = null
-    private lateinit var urgencyLevel: String
     private lateinit var userId: String
 
     private fun setLocale(languageCode: String) {
@@ -48,7 +47,7 @@ class TechnicalIssueActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_technical_issue)
+        setContentView(R.layout.activity_manager_issues)
 
         issueContainer = findViewById(R.id.issueDetailContainer)
         userRoleText = findViewById(R.id.userRole)
@@ -62,7 +61,6 @@ class TechnicalIssueActivity : AppCompatActivity() {
 
         setupBottomNavBar()
 
-        urgencyLevel = intent.getStringExtra("urgency_level") ?: ""
         userId = SessionManager.getLoggedUserId(this) ?: ""
 
         if (userId.isBlank()) {
@@ -78,28 +76,20 @@ class TechnicalIssueActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val user = userViewModel.getUserById(userId)
             if (user != null) {
-                userRoleText.text = getString(R.string.user_role_prefix_technical) + " " + user.name
+                userRoleText.text = getString(R.string.user_role_prefix_manager) + " " + user.name
             }
         }
 
-        loadFilteredIssues()
+        loadAllIssues()
     }
 
-    override fun onResume() {
-        super.onResume()
-        syncAllPendingFaults(this, lifecycleScope)
-    }
-
-    private fun loadFilteredIssues() {
+    private fun loadAllIssues() {
         lifecycleScope.launch {
-            faultViewModel.loadAllAssignedTo(userId)
+            faultViewModel.loadAll()
             faultViewModel.faults.collect { faults ->
-                Log.d("DEBUG", "FAULTS ATUALIZADAS: " + faults.joinToString { "#${it.faultId}" })
-                val filtered = faults.filter { it.urgency.equals(urgencyLevel, ignoreCase = true) }
-
                 issueContainer.removeAllViews()
-                filtered.forEach { fault ->
-                    val cardView = LayoutInflater.from(this@TechnicalIssueActivity)
+                faults.forEach { fault ->
+                    val cardView = LayoutInflater.from(this@ManagerIssueDetailsActivity)
                         .inflate(R.layout.issue_card_item, issueContainer, false)
 
                     bindCard(cardView, fault)
@@ -139,27 +129,26 @@ class TechnicalIssueActivity : AppCompatActivity() {
         }
 
         card.findViewById<Button>(R.id.sendMessageButton).setOnClickListener {
-            val input = EditText(this@TechnicalIssueActivity)
+            val input = EditText(this@ManagerIssueDetailsActivity)
             input.hint = getString(R.string.type_your_message)
 
-            val dialog = android.app.AlertDialog.Builder(this@TechnicalIssueActivity)
+            val dialog = android.app.AlertDialog.Builder(this@ManagerIssueDetailsActivity)
                 .setTitle(getString(R.string.send_message))
                 .setView(input)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
                     val messageText = input.text.toString().trim()
                     if (messageText.isNotBlank()) {
-                        if (SupabaseClientInstance.isConnectedToInternet(this@TechnicalIssueActivity)) {
-                            Log.d("DEBUG", "Enviando mensagem para faultId=${fault.faultId}, sync=${fault.syncStatus}")
+                        if (SupabaseClientInstance.isConnectedToInternet(this@ManagerIssueDetailsActivity)) {
                             lifecycleScope.launch {
-                                val success = sendMessageToUser(fault, messageText)
+                                val success = sendMessageToChat(fault, messageText)
                                 val toastMsg = if (success)
                                     getString(R.string.message_sent)
                                 else
                                     getString(R.string.message_send_failed)
-                                Toast.makeText(this@TechnicalIssueActivity, toastMsg, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@ManagerIssueDetailsActivity, toastMsg, Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(this@TechnicalIssueActivity, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@ManagerIssueDetailsActivity, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -167,6 +156,55 @@ class TechnicalIssueActivity : AppCompatActivity() {
                 .create()
 
             dialog.show()
+        }
+
+        card.findViewById<Button>(R.id.editDescriptionButton).text = getString(R.string.assign_to_other_technician)
+
+        card.findViewById<Button>(R.id.editDescriptionButton).setOnClickListener {
+            lifecycleScope.launch {
+                val techUsers: List<User> = userViewModel.getAllTechnicians()
+                if (techUsers.isEmpty()) {
+                    Toast.makeText(this@ManagerIssueDetailsActivity, getString(R.string.no_technicians_available), Toast.LENGTH_SHORT).show()
+                    return@launch
+                }
+
+                val technicianNames = techUsers.map { it.name }
+                val technicianIds = techUsers.map { it.userId }
+
+                val selectedIndex = intArrayOf(-1)
+
+                val builder = android.app.AlertDialog.Builder(this@ManagerIssueDetailsActivity)
+                builder.setTitle(getString(R.string.assign_to_other_technician))
+                builder.setSingleChoiceItems(technicianNames.toTypedArray(), -1) { _, which ->
+                    selectedIndex[0] = which
+                }
+
+                builder.setPositiveButton(android.R.string.ok) { _, _ ->
+                    if (selectedIndex[0] != -1) {
+                        val selectedTechId = technicianIds[selectedIndex[0]]
+                        val updated = fault.copy(
+                            assignedTo = selectedTechId,
+                            syncStatus = SupabaseClientInstance.isConnectedToInternet(this@ManagerIssueDetailsActivity) ?: false
+                        )
+                        lifecycleScope.launch {
+                            faultViewModel.update(updated)
+
+                            if (updated.syncStatus) {
+                                val success = SupabaseClientInstance.syncFault(updated, fault.reportedBy)
+                                if (success) {
+                                    faultViewModel.markAsSynced(updated.faultId)
+                                }
+                            }
+
+                            Toast.makeText(this@ManagerIssueDetailsActivity, getString(R.string.technician_assigned), Toast.LENGTH_SHORT).show()
+                            loadAllIssues()
+                        }
+                    }
+                }
+
+                builder.setNegativeButton(android.R.string.cancel, null)
+                builder.show()
+            }
         }
 
         card.findViewById<Button>(R.id.changeStatusButton).setOnClickListener {
@@ -187,13 +225,11 @@ class TechnicalIssueActivity : AppCompatActivity() {
 
                         if (updated.syncStatus) {
                             val success = SupabaseClientInstance.syncFault(updated, updated.reportedBy)
-                            if (success) {
-                                faultViewModel.markAsSynced(updated.faultId)
-                            }
+                            if (success) faultViewModel.markAsSynced(updated.faultId)
                         }
 
-                        Toast.makeText(this@TechnicalIssueActivity, getString(R.string.status_updated), Toast.LENGTH_SHORT).show()
-                        loadFilteredIssues()
+                        Toast.makeText(this@ManagerIssueDetailsActivity, getString(R.string.status_updated), Toast.LENGTH_SHORT).show()
+                        loadAllIssues()
                     }
                 }
                 dialog.dismiss()
@@ -202,43 +238,9 @@ class TechnicalIssueActivity : AppCompatActivity() {
             builder.show()
         }
 
-        card.findViewById<Button>(R.id.editDescriptionButton).setOnClickListener {
-            val input = EditText(this)
-            input.setText(fault.description)
-
-            val builder = android.app.AlertDialog.Builder(this)
-            builder.setTitle(getString(R.string.edit_description))
-            builder.setView(input)
-
-            builder.setPositiveButton(android.R.string.ok) { _, _ ->
-                val newDesc = input.text.toString().trim()
-                if (newDesc.isNotBlank() && newDesc != fault.description) {
-                    val updated = fault.copy(
-                        description = newDesc,
-                        syncStatus = SupabaseClientInstance.isConnectedToInternet(this) ?: false
-                    )
-                    lifecycleScope.launch {
-                        faultViewModel.update(updated)
-
-                        if (updated.syncStatus) {
-                            val success = SupabaseClientInstance.syncFault(updated, updated.reportedBy)
-                            if (success) {
-                                faultViewModel.markAsSynced(updated.faultId)
-                            }
-                        }
-
-                        Toast.makeText(this@TechnicalIssueActivity, getString(R.string.description_updated), Toast.LENGTH_SHORT).show()
-                        loadFilteredIssues()
-                    }
-                }
-            }
-
-            builder.setNegativeButton(android.R.string.cancel, null)
-            builder.show()
-        }
     }
 
-    private suspend fun sendMessageToUser(fault: Fault, messageText: String): Boolean {
+    private suspend fun sendMessageToChat(fault: Fault, messageText: String): Boolean {
         return try {
             val json = buildJsonObject {
                 put("faultid", fault.faultId)

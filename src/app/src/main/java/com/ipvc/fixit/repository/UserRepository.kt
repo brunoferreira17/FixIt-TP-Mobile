@@ -23,9 +23,10 @@ class UserRepository(private val userDao: UserDao) {
         userDao.getAllUsers()
     }
 
-    suspend fun getByRole(role: String): List<User> = withContext(Dispatchers.IO) {
-        userDao.getUsersByRole(role)
+    suspend fun getAllByRole(role: String): List<User> {
+        return userDao.getUsersByRole(role)
     }
+
 
     suspend fun login(email: String, password: String): User? = withContext(Dispatchers.IO) {
         userDao.login(email, password)

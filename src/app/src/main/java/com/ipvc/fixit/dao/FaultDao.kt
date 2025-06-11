@@ -42,8 +42,14 @@ interface FaultDao {
     @Query("DELETE FROM faults")
     suspend fun clearAll()
 
+    @Query("DELETE FROM faults WHERE faultId = :localId")
+    suspend fun deleteByLocalId(localId: Int)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(faults: List<Fault>)
+
+    @Query("SELECT * FROM faults WHERE faultId = :id")
+    suspend fun getById(id: Int): Fault?
 
     suspend fun clearAndInsert(faults: List<Fault>) {
         clearAll()

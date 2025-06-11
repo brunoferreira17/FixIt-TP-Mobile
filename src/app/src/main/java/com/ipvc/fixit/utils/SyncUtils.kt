@@ -3,7 +3,6 @@ package com.ipvc.fixit.utils
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import com.ipvc.fixit.SupabaseClientInstance
 import com.ipvc.fixit.database.AppDatabase
 import com.ipvc.fixit.repository.FaultRepository

@@ -13,11 +13,8 @@ class EquipmentViewModel(private val repository: EquipmentRepository) : ViewMode
     private val _equipments = MutableStateFlow<List<Equipment>>(emptyList())
     val equipments: StateFlow<List<Equipment>> = _equipments
 
-    fun insert(equipment: Equipment) {
-        viewModelScope.launch {
-            repository.insert(equipment)
-            loadAll()
-        }
+    suspend fun insert(equipment: Equipment): Long {
+        return repository.insert(equipment)
     }
 
     fun update(equipment: Equipment) {
@@ -38,6 +35,14 @@ class EquipmentViewModel(private val repository: EquipmentRepository) : ViewMode
         viewModelScope.launch {
             _equipments.value = repository.getAll()
         }
+    }
+
+    suspend fun getById(id: Int): Equipment? {
+        return repository.getById(id)
+    }
+
+    suspend fun deleteById(id: Int) {
+        return repository.deleteById(id)
     }
 
     suspend fun getAllEquipments(): List<Equipment> {

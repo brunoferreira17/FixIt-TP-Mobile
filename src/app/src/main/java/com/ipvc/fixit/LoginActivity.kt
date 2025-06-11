@@ -115,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
         val intent = when (role.lowercase()) {
             "operator" -> Intent(this, OperatorDashboardActivity::class.java)
             "technical" -> Intent(this, TechnicalDashboardActivity::class.java)
-            //"manager" -> Intent(this, ManagerDashboardActivity::class.java)
+            "manager" -> Intent(this, ManagerDashboardActivity::class.java)
             else -> Intent(this, MainActivity::class.java)
         }
         startActivity(intent)

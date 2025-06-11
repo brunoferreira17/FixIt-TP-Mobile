@@ -33,8 +33,10 @@ class LauncherActivity : AppCompatActivity() {
                 Log.d(TAG, "Sem ligação à internet. A sincronização não será feita.")
             }
 
-            startActivity(Intent(this@LauncherActivity, LoginActivity::class.java))
-            finish()
+            withContext(Dispatchers.Main) {
+                startActivity(Intent(this@LauncherActivity, LoginActivity::class.java))
+                finish()
+            }
         }
     }
 

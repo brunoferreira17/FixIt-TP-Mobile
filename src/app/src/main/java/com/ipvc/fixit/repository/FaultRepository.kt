@@ -23,12 +23,8 @@ class FaultRepository(private val dao: FaultDao) {
         dao.getAllFaults()
     }
 
-    suspend fun getByStatus(status: String): List<Fault> = withContext(Dispatchers.IO) {
-        dao.getFaultsByStatus(status)
-    }
-
-    suspend fun getByTechnician(userId: Int): List<Fault> = withContext(Dispatchers.IO) {
-        dao.getFaultsByTechnician(userId)
+    suspend fun getById(id: Int): Fault? = withContext(Dispatchers.IO) {
+        dao.getById(id)
     }
 
     suspend fun getByReporter(userId: Int): List<Fault> = withContext(Dispatchers.IO) {

@@ -40,16 +40,8 @@ class FaultViewModel(private val repository: FaultRepository) : ViewModel() {
         }
     }
 
-    fun loadByStatus(status: String) {
-        viewModelScope.launch {
-            _faults.value = repository.getByStatus(status)
-        }
-    }
-
-    fun loadByTechnician(userId: Int) {
-        viewModelScope.launch {
-            _faults.value = repository.getByTechnician(userId)
-        }
+    suspend fun getById(id: Int): Fault? {
+        return repository.getById(id)
     }
 
     fun loadByReporter(userId: Int) {
@@ -79,4 +71,6 @@ class FaultViewModel(private val repository: FaultRepository) : ViewModel() {
     suspend fun getUnsynced(): List<Fault> {
         return repository.getUnsynced()
     }
+
+
 }

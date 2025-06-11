@@ -48,25 +48,6 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/nav_reports"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:focusable="true"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        tools:ignore="TouchTargetSizeCheck">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="Reports"
-            android:src="@drawable/ic_reports" />
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/nav_profile"
         android:layout_width="0dp"
         android:layout_height="match_parent"

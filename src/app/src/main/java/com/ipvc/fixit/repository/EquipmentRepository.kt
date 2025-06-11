@@ -7,8 +7,8 @@ import kotlinx.coroutines.withContext
 
 class EquipmentRepository(private val dao: EquipmentDao) {
 
-    suspend fun insert(equipment: Equipment) = withContext(Dispatchers.IO) {
-        dao.insertEquipment(equipment)
+    suspend fun insert(equipment: Equipment): Long {
+        return dao.insertEquipment(equipment)
     }
 
     suspend fun update(equipment: Equipment) = withContext(Dispatchers.IO) {
@@ -26,6 +26,15 @@ class EquipmentRepository(private val dao: EquipmentDao) {
     suspend fun getByType(type: String): List<Equipment> = withContext(Dispatchers.IO) {
         dao.getEquipmentsByType(type)
     }
+
+    suspend fun getById(id: Int): Equipment? {
+        return dao.getEquipmentById(id)
+    }
+
+    suspend fun deleteById(id: Int) {
+        return dao.deleteEquipmentById(id)
+    }
+
 
     suspend fun deleteAll() {
         dao.clearAll()

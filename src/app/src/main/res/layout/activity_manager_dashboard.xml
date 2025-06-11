@@ -14,6 +14,7 @@
         android:layout_height="62dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="logo"
         android:src="@drawable/fixit_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="EN"
+        android:text="@string/language_switcher"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,11 +52,12 @@
         android:layout_marginEnd="241dp"
         android:layout_marginBottom="140dp"
         android:fontFamily="@font/roboto"
-        android:text="Manager João"
+        android:text="@string/user_role_prefix_manager"
         android:textColor="#555555"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/issuesContainer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toEndOf="@+id/logoIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,6 +73,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Card: Overview -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,48 +95,54 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/overviewTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Overview"
+                        android:text="@string/overview_title"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/totalIssues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Issues: 50"
+                        android:text="@string/total_issues"
                         android:textSize="16sp"
                         android:textColor="#000000"
                         android:layout_marginTop="8dp" />
 
                     <TextView
+                        android:id="@+id/pendingIssues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pending: 50"
+                        android:text="@string/pending_issues"
                         android:textSize="16sp"
                         android:textColor="#000000"
                         android:layout_marginTop="4dp" />
 
                     <TextView
+                        android:id="@+id/inProgressIssues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="In Progress: 15"
+                        android:text="@string/in_progress_issues"
                         android:textSize="16sp"
                         android:textColor="#000000"
                         android:layout_marginTop="4dp" />
 
                     <TextView
+                        android:id="@+id/solvedIssues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Solved: 20"
+                        android:text="@string/solved_issues"
                         android:textSize="16sp"
                         android:textColor="#000000"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
 
+
                 <LinearLayout
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
@@ -141,9 +150,10 @@
                     android:layout_marginStart="16dp">
 
                     <TextView
+                        android:id="@+id/mostProblematic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Most Problematic: CNC #1"
+                        android:text="@string/most_problematic"
                         android:textSize="16sp"
                         android:textColor="#000000" />
 
@@ -154,62 +164,17 @@
                         android:textSize="16sp"
                         android:textColor="#000000"
                         android:layout_marginTop="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="..."
-                        android:textSize="16sp"
-                        android:textColor="#000000"
-                        android:layout_marginTop="4dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="..."
-                        android:textSize="16sp"
-                        android:textColor="#000000"
-                        android:layout_marginTop="4dp" />
                 </LinearLayout>
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Botões de navegação -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnViewIssues"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
             android:layout_marginTop="40dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFFFFF">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="579dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_weight="1"
-                    android:text="View Issues"
-                    android:gravity="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp">
-                </TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:layout_marginTop="10dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#FFFFFF">
@@ -217,29 +182,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:padding="16dp"
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="579dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
                     android:layout_weight="1"
-                    android:text="Assign Technicians"
+                    android:text="@string/view_issues"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="16sp">
-                </TextView>
+                    android:textSize="16sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnAssignTechnicians"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="12dp"
-            android:layout_marginTop="10dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#FFFFFF">
@@ -247,29 +209,53 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:padding="16dp"
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="579dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
                     android:layout_weight="1"
-                    android:text="View Reports"
+                    android:text="@string/assign_technicians"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="16sp">
-                </TextView>
+                    android:textSize="16sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnManageEquipments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/manage_equipments"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnCommunicateTeam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="10dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#FFFFFF">
@@ -277,21 +263,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:padding="16dp"
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="579dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
                     android:layout_weight="1"
-                    android:text="Communicate with Team"
+                    android:text="@string/communicate_team"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="16sp">
-                </TextView>
+                    android:textSize="16sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -303,5 +285,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

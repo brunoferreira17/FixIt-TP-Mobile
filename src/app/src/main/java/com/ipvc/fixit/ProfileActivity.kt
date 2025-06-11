@@ -3,12 +3,8 @@ package com.ipvc.fixit
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.util.Log
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +19,7 @@ import io.github.jan.supabase.storage.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Locale
+import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -143,12 +139,15 @@ class ProfileActivity : AppCompatActivity() {
                 phoneEdit.setText(user.phone ?: "")
                 roleText.text = getString(R.string.role_operator) + user.role
 
+                Log.d("ProfileDebug", "Foto de perfil: ${user.profilePhoto}")
+
                 if (user.profilePhoto.isNullOrEmpty()) {
                     profilePhoto.setImageResource(R.drawable.default_photo)
                 } else {
                     Glide.with(this@ProfileActivity)
                         .load(user.profilePhoto)
                         .placeholder(R.drawable.default_photo)
+                        .error(R.drawable.default_photo)
                         .into(profilePhoto)
                 }
             }
@@ -181,7 +180,7 @@ class ProfileActivity : AppCompatActivity() {
             if (success && remoteSuccess) {
                 Toast.makeText(this@ProfileActivity, getString(R.string.profile_updated), Toast.LENGTH_SHORT).show()
                 toggleEditing(false)
-                currentUser = finalUser
+                loadUserData(user.userId)
             } else {
                 Toast.makeText(this@ProfileActivity, getString(R.string.error_updating_profile), Toast.LENGTH_SHORT).show()
             }

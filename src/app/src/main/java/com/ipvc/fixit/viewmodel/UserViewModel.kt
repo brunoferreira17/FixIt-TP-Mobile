@@ -60,6 +60,14 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
         return repository.getAnyTechnician()
     }
 
+    suspend fun getAllTechnicians(): List<User> {
+        return repository.getAllByRole("Technical")
+    }
+
+    suspend fun getAllUsers(): List<User> {
+        return repository.getAll()
+    }
+
 
     fun login(email: String, password: String, context: Context) {
         viewModelScope.launch {

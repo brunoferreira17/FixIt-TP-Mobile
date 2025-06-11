@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6F0FA"
-    tools:context=".TechnicalIssueActivity">
+    tools:context=".ManagerIssueDetailsActivity">
 
     <ImageView
         android:id="@+id/logoIcon"
@@ -51,7 +51,7 @@
         android:layout_marginEnd="241dp"
         android:layout_marginBottom="140dp"
         android:fontFamily="@font/roboto"
-        android:text="@string/user_role_prefix_technical"
+        android:text="@string/user_role_prefix_manager"
         android:textColor="#555555"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/issueDetailContainer"
@@ -184,7 +184,7 @@
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="#2196F3"
                         android:padding="8dp"
-                        android:text="Send Message to operator"
+                        android:text="@string/send_message_to_chat"
                         android:textColor="#FFFFFF"
                         android:textSize="8sp"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -205,14 +205,13 @@
                         android:layout_height="40dp"
                         android:backgroundTint="#2196F3"
                         android:padding="8dp"
-                        android:text="Edit Description"
+                        android:text="@string/assign_to_other_technician"
                         android:textColor="#FFFFFF"
                         android:textSize="10sp"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 
     <include
@@ -221,5 +220,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
