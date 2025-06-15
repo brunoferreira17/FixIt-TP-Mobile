@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6F0FA"
+    android:fitsSystemWindows="true"
     tools:context=".ManagerDashboardActivity">
 
     <ImageView
@@ -23,14 +23,12 @@
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/rem"
         android:text="@string/app_name"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/logoIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/logoIcon"
+        app:layout_constraintTop_toTopOf="@+id/logoIcon" />
 
     <TextView
         android:id="@+id/languageSwitcher"
@@ -48,39 +46,33 @@
         android:id="@+id/userRole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="241dp"
-        android:layout_marginBottom="140dp"
         android:fontFamily="@font/roboto"
         android:text="@string/user_role_prefix_manager"
         android:textColor="#555555"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/issuesContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toEndOf="@+id/logoIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
     <LinearLayout
         android:id="@+id/issuesContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="48dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/userRole"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/userRole">
 
         <!-- Card: Overview -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,71 +91,71 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/overview_title"
+                        android:textColor="#000000"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#000000" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/totalIssues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/total_issues"
-                        android:textSize="16sp"
                         android:textColor="#000000"
-                        android:layout_marginTop="8dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/pendingIssues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:text="@string/pending_issues"
-                        android:textSize="16sp"
                         android:textColor="#000000"
-                        android:layout_marginTop="4dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/inProgressIssues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:text="@string/in_progress_issues"
-                        android:textSize="16sp"
                         android:textColor="#000000"
-                        android:layout_marginTop="4dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/solvedIssues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:text="@string/solved_issues"
-                        android:textSize="16sp"
                         android:textColor="#000000"
-                        android:layout_marginTop="4dp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
                     android:gravity="center_vertical"
-                    android:layout_marginStart="16dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/mostProblematic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/most_problematic"
-                        android:textSize="16sp"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="..."
-                        android:textSize="16sp"
                         android:textColor="#000000"
-                        android:layout_marginTop="8dp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -175,22 +167,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/view_issues"
                     android:gravity="center"
+                    android:text="@string/view_issues"
                     android:textColor="#000000"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -202,22 +194,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/assign_technicians"
                     android:gravity="center"
+                    android:text="@string/assign_technicians"
                     android:textColor="#000000"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -229,22 +221,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/manage_equipments"
                     android:gravity="center"
+                    android:text="@string/manage_equipments"
                     android:textColor="#000000"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -256,22 +248,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/communicate_team"
                     android:gravity="center"
+                    android:text="@string/communicate_team"
                     android:textColor="#000000"
                     android:textSize="16sp" />
             </LinearLayout>
