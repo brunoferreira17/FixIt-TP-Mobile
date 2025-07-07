@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ipvc.fixit.database.AppDatabase
 import com.ipvc.fixit.entities.*
+import com.ipvc.fixit.utils.SessionManager
 import com.ipvc.fixit.utils.syncAllPendingFaults
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.Dispatchers
@@ -23,9 +24,40 @@ class LauncherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
-            if (SupabaseClientInstance.isConnectedToInternet(this@LauncherActivity)) {
+            val context = this@LauncherActivity
+            val db = AppDatabase.getDatabase(context)
+
+            val savedUserId = SessionManager.getLoggedUserId(context)
+
+            if (savedUserId != null) {
+                val localUser = db.userDao().getUserById(savedUserId)
+                if (localUser != null) {
+                    Log.d(TAG, "Login automático como ${localUser.email} (${localUser.role})")
+                    SessionManager.saveUserRole(context, localUser.role)
+
+                    if (SupabaseClientInstance.isConnectedToInternet(context)) {
+                        Log.d(TAG, "Ligado à internet. Sincronizando alterações locais...")
+                        syncAllPendingFaults(context, lifecycleScope)
+
+                        Log.d(TAG, "Importando dados do Supabase...")
+                        syncDatabaseFromSupabase()
+                    } else {
+                        Log.d(TAG, "Sem ligação à internet. A sincronização não será feita.")
+                    }
+
+                    withContext(Dispatchers.Main) {
+                        redirectToDashboard(localUser.role)
+                    }
+                    return@launch
+                } else {
+                    Log.w(TAG, "Utilizador guardado não encontrado localmente.")
+                }
+            }
+
+            // Caso não haja sessão guardada ou user local, segue fluxo normal
+            if (SupabaseClientInstance.isConnectedToInternet(context)) {
                 Log.d(TAG, "Ligado à internet. Sincronizando alterações locais...")
-                syncAllPendingFaults(this@LauncherActivity, lifecycleScope)
+                syncAllPendingFaults(context, lifecycleScope)
 
                 Log.d(TAG, "Importando dados do Supabase...")
                 syncDatabaseFromSupabase()
@@ -34,48 +66,49 @@ class LauncherActivity : AppCompatActivity() {
             }
 
             withContext(Dispatchers.Main) {
-                startActivity(Intent(this@LauncherActivity, LoginActivity::class.java))
+                startActivity(Intent(context, LoginActivity::class.java))
                 finish()
             }
         }
     }
 
+    private fun redirectToDashboard(role: String) {
+        val intent = when (role.lowercase()) {
+            "operator" -> Intent(this, OperatorDashboardActivity::class.java)
+            "technical" -> Intent(this, TechnicalDashboardActivity::class.java)
+            "manager" -> Intent(this, ManagerDashboardActivity::class.java)
+            else -> Intent(this, MainActivity::class.java)
+        }
+        startActivity(intent)
+        finish()
+    }
 
     private suspend fun syncDatabaseFromSupabase() = withContext(Dispatchers.IO) {
         try {
             val db = AppDatabase.getDatabase(applicationContext)
             val client = SupabaseClientInstance.client
 
-            // Apagar dados locais
             db.userDao().clearAll()
             db.equipmentDao().clearAll()
             db.faultDao().clearAll()
             db.messageDao().clearAll()
             Log.d(TAG, "Dados locais apagados.")
 
-            // USERS
             val users = client.from("Users").select().decodeList<User>()
-            Log.d(TAG, "Utilizadores recebidos: ${users.size}")
             db.userDao().insertAll(users)
-            Log.d(TAG, "Utilizadores inseridos localmente.")
+            Log.d(TAG, "Utilizadores sincronizados.")
 
-            // EQUIPMENT
             val equipment = client.from("Equipment").select().decodeList<Equipment>()
-            Log.d(TAG, "Equipamentos recebidos: ${equipment.size}")
             db.equipmentDao().insertAll(equipment)
-            Log.d(TAG, "Equipamentos inseridos localmente.")
+            Log.d(TAG, "Equipamentos sincronizados.")
 
-            // FAULTS
             val faults = client.from("Fault").select().decodeList<Fault>()
-            Log.d(TAG, "Avarias recebidas: ${faults.size}")
             db.faultDao().insertAll(faults)
-            Log.d(TAG, "Avarias inseridas localmente.")
+            Log.d(TAG, "Avarias sincronizadas.")
 
-            // MESSAGES
             val messages = client.from("Message").select().decodeList<Message>()
-            Log.d(TAG, "Mensagens recebidas: ${messages.size}")
             db.messageDao().insertAll(messages)
-            Log.d(TAG, "Mensagens inseridas localmente.")
+            Log.d(TAG, "Mensagens sincronizadas.")
 
         } catch (e: Exception) {
             Log.e(TAG, "Erro na sincronização: ${e.message}", e)

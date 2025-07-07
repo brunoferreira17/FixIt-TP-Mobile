@@ -1,0 +1,29 @@
+# Android/IntelliJ specific
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+# Keystore files
+*.jks
+*.keystore
+
+# Supabase and secret keys
+*.env
+*.key
+*.secret
+*.bak
+*.tmp
+
+# APKs
+app/release/*.apk
+app/debug/*.apk

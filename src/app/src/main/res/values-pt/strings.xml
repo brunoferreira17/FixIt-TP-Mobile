@@ -21,10 +21,10 @@
     <string name="error_generic">Erro ao iniciar sessão. Tenta novamente mais tarde.</string>
 
     <!-- Register Page -->
-    <string name="message_register">Registro</string>
+    <string name="message_register">Registo</string>
     <string name="name_hint">Insira seu nome</string>
     <string name="phoneNumber_hint">Insira o seu número (opcional)</string>
-    <string name="register">Registrar</string>
+    <string name="register">Registar</string>
     <string name="login_hint">Já tens conta? Login</string>
 
     <!-- Technical Page -->

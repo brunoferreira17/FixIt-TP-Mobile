@@ -1,0 +1,6 @@
+# Caminho local para o SDK Android (ajusta conforme o teu sistema operativo)
+sdk.dir=C:\\Users\\SEU_UTILIZADOR\\AppData\\Local\\Android\\Sdk
+
+# Supabase configuration
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_KEY=your-secret-api-key
